@@ -48,8 +48,12 @@ def update_graph(dp,ec):
 		            showlegend=False,
 		            margin=go.Margin(l=50, r=50, t=40, b=20),
                     yaxis=dict(
-                        range=[0,1500]
+                        range=[0,1500],
+                        title= 'Cure Depth (µm)'
                     ),
+                    xaxis=dict(
+                        title= 'Exposure (mJ/cm2)'
+                    )
 
 		        )
 	}	
