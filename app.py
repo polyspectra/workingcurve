@@ -15,10 +15,10 @@ app.layout = html.Div([
 	html.Div(children='''
         A working curve helper written in Dash:
     '''),
-    html.Div('Penetration Depth:'),
-    dcc.Input(id='dp', value='500', type="number"),
-    html.Div('Critical Exposure:'),
-    dcc.Input(id='ec', value='40', type="number"),
+    html.Div('Penetration Depth (µm):'),
+    dcc.Input(id='dp', value='120', type="number"),
+    html.Div('Critical Exposure (mJ/cm2):'),
+    dcc.Input(id='ec', value='25', type="number"),
     html.Div(id='my-div'),
     dcc.Graph(
 	    style={'height': 300},
