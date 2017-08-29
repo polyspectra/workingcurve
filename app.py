@@ -33,8 +33,8 @@ app.layout = html.Div([
 )
 def update_graph(dp,ec):
 	N = 500
-	exp = np.linspace(0.5 * int(ec), 10 * int(ec), N)
-	cd = int(dp)*np.log(exp / int(ec))
+	exp = np.linspace(0.5 * float(ec), 10 * float(ec), N)
+	cd = float(dp)*np.log(exp / float(ec))
 	# random_y = np.random.randn(N)
 
 
