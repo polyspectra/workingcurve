@@ -15,7 +15,7 @@ app.layout = html.Div([
     dcc.Markdown('''
 # Stereolithography Print Settings Utility:
 
-#### Built with love by [polySpectra](http://polyspectra.com)
+#### Built with love by [polySpectra](http://polyspectra.com). Fork on [GitHub](https://github.com/polyspectra/workingcurve).
 '''),
     dcc.Markdown('''
 ## Photopolymer Working Curve:
@@ -41,7 +41,7 @@ dcc.Markdown('''
         html.Div('Exposure (mJ / cm^2):'),
     dcc.Input(id='exp', value='0', type="number"),  
         html.Div('Slice Thickness (microns):'),
-    dcc.Input(id='dz', value='10', type="number"),
+    dcc.Input(id='dz', value='100', type="number"),
     html.Div('"Maximum" Volumetric / Multilayer Exposure:'),
     html.Div(id='vol', children=''',
         n/a
@@ -65,7 +65,7 @@ This is a utility to facilitate stereolithographic 3D printing (SLA / DLP).
 
 **Slice Thickness:** The z step size of the printer, aka layer thickness
 
-**"Maximum" Volumetric / Multilayer Exposure:** This is the total exposure a 'bottom' layer would receive after subsequently printing _many_ layers on top of it. This is an attempt to quantify the total amount of light received by the layer.
+**"Maximum" Volumetric / Multilayer Exposure:** This is the total exposure a 'bottom' layer would receive after subsequently printing _many_ layers on top of it. This is an attempt to quantify the maximum amount of light received by the layer when there is bleed through.
 
 **"Maximum" Print Through Exposure & Additional Cure Depth:** This is the 'extra' exposure an empty layer would receive after subsequently printing _many_ layers on top of it. This is an attempt to quantify the worse case scenario for "print through", the effect that printed layers are often thicker than the desired layer thickness / cure depth, because light from subsequent layers bleeds through. Both the extra "print-through" exposure and corresponding "print-through" cure depth are calculated. The bigger this number, the larger the error on the dimensional accuracy of 'overhung' features.
 
@@ -73,11 +73,11 @@ This is a utility to facilitate stereolithographic 3D printing (SLA / DLP).
 
 ## Assumptions: 
 
-This utility only accounts for Beer's Law absorption, which means that there is no scattering accounted for in the optics. It also assumes that the Ec and Dp of the photopolymer do not change throughout the print process. The "maximum" print through assumes that 1000 layers 'on top' is enough to account for the excess light from subsequently printed layers. It also assumes that there is still liquid resin around to be polymerized (ie - the resin bath level is very high). 
+This utility only accounts for Beer's Law absorption, which means that there is no scattering accounted for in the optics. It also assumes that the critical exposure and penetration depth of the photopolymer do not change throughout the print process. The "maximum" print through assumes that 1000 layers 'on top' is enough to account for the excess light from subsequently printed layers. It also assumes that there is still liquid resin around to be polymerized (ie - the resin bath level is very high). 
 
 ## References:
 
-* P.F. Jacobs - Fundamentals of Stereolithography
+* P.F. Jacobs - [Rapid Prototyping & Manufacturing: Fundamentals of Stereolithography](https://www.amazon.com/Rapid-Prototyping-Manufacturing-Fundamentals-StereoLithography/dp/0872634256/ref=as_li_ss_tl?ie=UTF8&qid=1504746907&sr=8-1&keywords=fundamentals+of+stereolithography&linkCode=ll1&tag=rawwerks09-20&linkId=06bf9e70b23b749cc52c5dda61d326b1)
 
 
 '''),
@@ -195,7 +195,7 @@ def volumetric_exp(dp,ec,exp,dz):
     for i in range(0,limit):
         add = add + (float(exp) * np.exp(-(float(dz)*i) / float(dp)))
 
-    return str(add) + ''' mJ / cm^2 volumetric exposure'''
+    return str(int(add)) + ''' mJ / cm^2 volumetric exposure'''
 
 
 #this callback updates the print through exposure
@@ -220,9 +220,9 @@ def thru_exp(dp,ec,exp,dz):
     if(thru < 0.00):
         thru = 0
 
-    return str(add) + ''' mJ / cm^2 "print through" exposure and 
+    return str(int(add)) + ''' mJ / cm^2 "print through" exposure and 
 
-    ''' + str(thru) + ''' microns "print through" cure depth '''
+    ''' + str(int(thru)) + ''' microns "print through" cure depth '''
 
 	
     
