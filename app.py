@@ -33,7 +33,7 @@ app.layout = html.Div([
 ## Solve the Exposure for a Specific Cure Depth:
 '''),
     html.Div('Cure Depth (microns):'),
-    dcc.Input(id='cd', value='0', type="number"),
+    dcc.Input(id='cd', value='1', type="number"),
     html.Div(id='expSolve', children='''Set exposure to: n/a'''),
 dcc.Markdown('''
 ## Helpful Metrics for Specific Print Settings:
@@ -142,7 +142,7 @@ def working_curve(dp,ec):
         
 
 def exposure(dp,ec,cd):
-    if(cd>0 and ec>0):
+    if(float(cd) > 0 and float(dp)>0):
         exp = np.exp(float(cd) / float(dp)) * float(ec)
 
         return '''Set exposure to: ''' + str(exp)
