@@ -14,6 +14,8 @@ server.secret_key = os.environ.get('SECRET_KEY', 'my-secret-key')
 app.layout = html.Div([         
     dcc.Markdown('''
 # Stereolithography Print Settings Utility:
+
+#### Built with love by [polySpectra](http://polyspectra.com)
 '''),
     dcc.Markdown('''
 ## Photopolymer Working Curve:
