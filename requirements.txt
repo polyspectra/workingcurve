@@ -13,7 +13,7 @@ gunicorn==19.7.1
 idna==2.6
 ipython-genutils==0.2.0
 itsdangerous==0.24
-Jinja2==2.9.6
+Jinja2>=2.10.1
 jsonschema==2.6.0
 jupyter-core==4.3.0
 MarkupSafe==1.0
@@ -23,8 +23,8 @@ pandas==0.20.3
 plotly==2.0.14
 python-dateutil==2.6.1
 pytz==2017.2
-requests==2.18.4
+requests>=2.20.0
 six==1.10.0
 traitlets==4.3.2
-urllib3==1.22
+urllib3>=1.24.2
 Werkzeug==0.12.2
